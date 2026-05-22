@@ -11,12 +11,23 @@ Item Record List (IRL) app: import Excel, persist items, calculate OLV and inven
 
 ## Run (no Docker)
 
+**macOS / Linux (recommended):**
+
+```bash
+cd kopius-gb-fullstack-net-assessment   # repo root
+./run.sh
+```
+
+Or manually:
+
 ```bash
 cd kopius-gb-fullstack-net-assessment   # repo root
 dotnet restore
 dotnet build -m:1
 dotnet run --project src/GbIrl.Web
 ```
+
+`./run.sh` opens the browser on macOS and listens on `http://127.0.0.1:5136` (override with `PORT=5249 ./run.sh`). Set `OPEN_BROWSER=0` to skip `open`.
 
 Open the URL shown in the console, then use `/Upload` to upload `samples/sample_irl.xlsx`.
 
