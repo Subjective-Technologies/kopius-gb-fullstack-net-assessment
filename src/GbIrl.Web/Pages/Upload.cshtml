@@ -1,0 +1,54 @@
+@page
+@model GbIrl.Web.Pages.UploadModel
+@{
+    ViewData["Title"] = "Upload IRL";
+}
+
+<h1>Upload IRL</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <div>
+        <label for="file">Excel file</label>
+        <input id="file" name="file" type="file" accept=".xlsx" />
+    </div>
+    <button type="submit">Upload</button>
+</form>
+
+@if (!string.IsNullOrWhiteSpace(Model.Message))
+{
+    <p>@Model.Message</p>
+}
+
+@if (Model.HasResult)
+{
+    <section>
+        <h2>Import Summary</h2>
+        <p>Loaded: @Model.LoadedCount</p>
+        <p>Rejected: @Model.RejectedCount</p>
+
+        @if (Model.RejectedRows.Count > 0)
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Row</th>
+                        <th>Reason</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var row in Model.RejectedRows)
+                    {
+                        <tr>
+                            <td>@row.RowNumber</td>
+                            <td>@row.Reason</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+        <p class="mt-3">
+            <a class="btn btn-primary" asp-page="/Items">View Items</a>
+        </p>
+    </section>
+}

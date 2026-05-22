@@ -1,0 +1,35 @@
+@page "{id:int}"
+@using GbIrl.Core.Enums
+@model GbIrl.Web.Pages.Items.EditModel
+@{
+    ViewData["Title"] = "Edit Item";
+}
+
+<h1>Edit Item</h1>
+
+@if (Model.Item is not null)
+{
+    <dl>
+        <dt>SKU</dt>
+        <dd>@Model.Item.Sku</dd>
+        <dt>Description</dt>
+        <dd>@Model.Item.Description</dd>
+        <dt>Category</dt>
+        <dd>@Model.Item.Category</dd>
+    </dl>
+}
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <label asp-for="Quantity"></label>
+    <input asp-for="Quantity" />
+
+    <label asp-for="UnitCost">Unit Cost</label>
+    <input asp-for="UnitCost" />
+
+    <label asp-for="Condition"></label>
+    <select asp-for="Condition" asp-items="Html.GetEnumSelectList<ItemCondition>()"></select>
+
+    <button type="submit">Save</button>
+    <a asp-page="/Items">Cancel</a>
+</form>

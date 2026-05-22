@@ -1,0 +1,49 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="mb-4">
+    <h1 class="display-5">Gordon Brothers — Item Record List</h1>
+    <p class="lead text-muted">
+        Import inventory from Excel, review OLV and statistics, filter by category or condition, and edit item values.
+    </p>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h2 class="h5 card-title">Upload IRL</h2>
+                <p class="card-text">
+                    Import an Excel file (<code>.xlsx</code>). Valid rows are saved; rejected rows are listed with reasons.
+                </p>
+                <a class="btn btn-primary" asp-page="/Upload">Go to Upload</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h2 class="h5 card-title">Items &amp; statistics</h2>
+                <p class="card-text">
+                    View all items with OLV per row, total OLV, weighted average unit cost, median, and standard deviation.
+                    Filter by category or condition; stats update for the visible subset.
+                </p>
+                <a class="btn btn-primary" asp-page="/Items">View Items</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="h5 card-title">Edit an item</h2>
+                <p class="card-text mb-0">
+                    From the items table, use <strong>Edit</strong> on a row to change quantity, unit cost, or condition.
+                    OLV and aggregates recalculate when you save.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

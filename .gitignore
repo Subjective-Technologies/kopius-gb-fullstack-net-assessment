@@ -1,0 +1,22 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## SQLite (created at runtime)
+*.db
+*.db-shm
+*.db-wal
+
+## IDE / OS
+.vs/
+.idea/
+*.swp
+.DS_Store
+
+## Secrets
+appsettings.Development.local.json
+secrets.json

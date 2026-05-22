@@ -1,0 +1,70 @@
+@page
+@using GbIrl.Core.Enums
+@using GbIrl.Core.Services
+@model GbIrl.Web.Pages.ItemsModel
+@{
+    ViewData["Title"] = "Items";
+}
+
+<h1>Items</h1>
+
+<form method="get">
+    <label for="category">Category</label>
+    <select id="category" name="category">
+        <option value="">All</option>
+        @foreach (var category in Model.Categories)
+        {
+            <option value="@category" selected="@(category == Model.Category)">@category</option>
+        }
+    </select>
+
+    <label for="condition">Condition</label>
+    <select id="condition" name="condition">
+        <option value="">All</option>
+        @foreach (var condition in Enum.GetValues<ItemCondition>())
+        {
+            <option value="@condition" selected="@(condition == Model.Condition)">@condition</option>
+        }
+    </select>
+
+    <button type="submit">Filter</button>
+    <a asp-page="/Items">Clear</a>
+</form>
+
+<section>
+    <h2>Statistics</h2>
+    <p>Total OLV: @Model.TotalOlv.ToString("0.##")</p>
+    <p>Weighted Average Unit Cost: @Model.WeightedAverageUnitCost.ToString("0.####")</p>
+    <p>Median Unit Cost: @Model.MedianUnitCost.ToString("0.##")</p>
+    <p>Standard Deviation Unit Cost: @Model.StandardDeviationUnitCost.ToString("0.####")</p>
+</section>
+
+<table>
+    <thead>
+        <tr>
+            <th>SKU</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Unit Cost</th>
+            <th>Condition</th>
+            <th>OLV</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>@item.Sku</td>
+                <td>@item.Description</td>
+                <td>@item.Category</td>
+                <td>@item.Quantity</td>
+                <td>@item.UnitCost.ToString("0.##")</td>
+                <td>@item.Condition</td>
+                <td>@OlvCalculator.Calculate(item.UnitCost, item.Quantity, item.Condition).ToString("0.##")</td>
+                <td><a asp-page="/Items/Edit" asp-route-id="@item.Id">Edit</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
